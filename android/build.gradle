@@ -19,3 +19,11 @@ buildscript {
 }
 
 apply plugin: "com.facebook.react.rootproject"
+
+subprojects { subproject ->
+    if (subproject.name == "react-native-splash-screen") {
+        configurations.configureEach {
+            exclude group: "com.android.support"
+        }
+    }
+}
