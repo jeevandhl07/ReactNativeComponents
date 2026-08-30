@@ -17,31 +17,29 @@ export const styles = StyleSheet.create({
   },
   hero: {
     paddingTop: SPACING.md + verticalScale(2),
-    paddingBottom: SPACING.lg - verticalScale(2),
+    paddingBottom: SPACING.md,
   },
-  logoMark: {
+  header: {
     alignItems: 'center',
-    borderRadius: BORDER_RADIUS.md,
-    height: moderateScale(48),
-    justifyContent: 'center',
-    marginBottom: SPACING.md + verticalScale(2),
-    width: moderateScale(48),
+    flexDirection: 'row',
+    gap: SPACING.sm,
+    marginBottom: SPACING.md,
   },
-  logoText: {
-    fontFamily: FONT_FAMILY.extraBold,
-    fontSize: moderateScale(16),
+  logoImage: {
+    borderRadius: BORDER_RADIUS.md,
+    height: moderateScale(44),
+    width: moderateScale(44),
   },
   kicker: {
     fontFamily: FONT_FAMILY.bold,
     fontSize: moderateScale(13),
-    marginBottom: SPACING.sm,
     textTransform: 'uppercase',
   },
   title: {
     fontFamily: FONT_FAMILY.extraBold,
-    fontSize: moderateScale(32),
-    lineHeight: moderateScale(38),
-    marginBottom: SPACING.sm + verticalScale(4),
+    fontSize: moderateScale(30),
+    lineHeight: moderateScale(36),
+    marginBottom: SPACING.sm,
   },
   subtitle: {
     fontFamily: FONT_FAMILY.regular,
@@ -57,9 +55,28 @@ export const styles = StyleSheet.create({
     paddingHorizontal: SPACING.md - moderateScale(2),
   },
   searchIcon: {
-    fontFamily: FONT_FAMILY.bold,
-    fontSize: moderateScale(20),
+    height: moderateScale(20),
     marginRight: SPACING.sm + moderateScale(2),
+    position: 'relative',
+    width: moderateScale(20),
+  },
+  searchIconCircle: {
+    borderRadius: moderateScale(6),
+    borderWidth: moderateScale(2),
+    height: moderateScale(12),
+    left: moderateScale(2),
+    position: 'absolute',
+    top: moderateScale(2),
+    width: moderateScale(12),
+  },
+  searchIconHandle: {
+    borderRadius: moderateScale(1),
+    height: moderateScale(8),
+    position: 'absolute',
+    right: moderateScale(3),
+    top: moderateScale(12),
+    transform: [{ rotate: '-45deg' }],
+    width: moderateScale(2),
   },
   searchInput: {
     flex: 1,
@@ -68,26 +85,11 @@ export const styles = StyleSheet.create({
     height: verticalScale(50),
     padding: 0,
   },
-  categoryList: {
-    gap: SPACING.sm + moderateScale(2),
-    paddingBottom: SPACING.lg - verticalScale(2),
-    paddingTop: SPACING.md,
-  },
-  categoryChip: {
-    borderRadius: BORDER_RADIUS.md,
-    borderWidth: 1,
-    minHeight: verticalScale(40),
-    paddingHorizontal: SPACING.md - moderateScale(2),
-    paddingVertical: SPACING.sm + verticalScale(2),
-  },
-  categoryText: {
-    fontFamily: FONT_FAMILY.bold,
-    fontSize: moderateScale(14),
-  },
   sectionHeader: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginTop: SPACING.lg - verticalScale(2),
     marginBottom: SPACING.md - verticalScale(2),
   },
   sectionTitle: {
@@ -98,15 +100,6 @@ export const styles = StyleSheet.create({
     fontFamily: FONT_FAMILY.regular,
     fontSize: moderateScale(13),
     marginTop: verticalScale(3),
-  },
-  statusPill: {
-    borderRadius: BORDER_RADIUS.md,
-    paddingHorizontal: SPACING.sm + moderateScale(4),
-    paddingVertical: SPACING.sm,
-  },
-  statusPillText: {
-    fontFamily: FONT_FAMILY.extraBold,
-    fontSize: moderateScale(13),
   },
   card: {
     borderRadius: BORDER_RADIUS.md,
@@ -134,16 +127,6 @@ export const styles = StyleSheet.create({
     fontFamily: FONT_FAMILY.regular,
     fontSize: moderateScale(15),
     lineHeight: moderateScale(22),
-  },
-  itemStatus: {
-    borderRadius: BORDER_RADIUS.md,
-    marginLeft: SPACING.sm + moderateScale(4),
-    paddingHorizontal: SPACING.sm + moderateScale(2),
-    paddingVertical: SPACING.sm - verticalScale(1),
-  },
-  itemStatusText: {
-    fontFamily: FONT_FAMILY.extraBold,
-    fontSize: moderateScale(12),
   },
   tokenRow: {
     flexDirection: 'row',

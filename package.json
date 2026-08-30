@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
+    "android": "react-native run-android --active-arch-only",
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
@@ -14,7 +14,9 @@
     "@react-navigation/stack": "^7.10.22",
     "react": "19.2.3",
     "react-native": "0.86.2",
+    "react-native-gesture-handler": "^3.1.0",
     "react-native-safe-area-context": "^5.5.2",
+    "react-native-screens": "^4.27.0",
     "react-native-splash-screen": "^3.3.0"
   },
   "devDependencies": {

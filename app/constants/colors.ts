@@ -58,7 +58,7 @@ export type AppTheme = {
 
 export const APP_THEMES: Record<'light' | 'dark', AppTheme> = {
   light: {
-    canvas: '#f6f8fb',
+    canvas: '#ffffff',
     surface: COLORS.white,
     ink: '#172033',
     muted: '#667085',

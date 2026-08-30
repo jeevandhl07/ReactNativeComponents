@@ -1,19 +1,17 @@
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { MainScreen } from '../../screens';
+import { ButtonScreen, MainScreen } from '../../screens';
+import { MainStackParamList } from '../types';
 
-export type AuthStackParamList = {
-  MainScreen: undefined;
-};
+const Stack = createStackNavigator<MainStackParamList>();
 
-const Stack = createStackNavigator<AuthStackParamList>();
-
-const AuthStack: React.FC = () => {
+const MainStack: React.FC = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false, animation: 'none' }}>
       <Stack.Screen name="MainScreen" component={MainScreen} />
+      <Stack.Screen name="ButtonScreen" component={ButtonScreen} />
     </Stack.Navigator>
   );
 };
 
-export default AuthStack;
+export default MainStack;

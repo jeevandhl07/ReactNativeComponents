@@ -1,52 +1,49 @@
 import React, { useMemo, useState } from 'react';
 import {
   FlatList,
+  Image,
   ListRenderItem,
   Pressable,
-  SafeAreaView,
-  ScrollView,
   Text,
   TextInput,
   useColorScheme,
   View,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import images from '../../assets/images';
+import { Container } from '../../components';
 import { APP_THEMES, AppTheme } from '../../constants';
+import { MainStackParamList } from '../../navigation/types';
 import { styles } from './styles';
 
-type ComponentCategory = 'All' | 'Basics' | 'Forms' | 'Feedback' | 'Navigation';
+type ComponentCategory = 'Basics' | 'Forms' | 'Feedback' | 'Navigation';
 
 type ComponentItem = {
   id: string;
   name: string;
-  category: Exclude<ComponentCategory, 'All'>;
+  category: ComponentCategory;
   description: string;
-  status: 'Ready' | 'Draft' | 'Planned';
   tokens: string[];
+  routeName?: keyof MainStackParamList;
 };
-
-const categories: ComponentCategory[] = [
-  'All',
-  'Basics',
-  'Forms',
-  'Feedback',
-  'Navigation',
-];
 
 const componentItems: ComponentItem[] = [
   {
     id: 'button',
     name: 'Button',
     category: 'Basics',
-    description: 'Primary, secondary, ghost, disabled, loading, and icon states.',
-    status: 'Ready',
+    description:
+      'Primary, secondary, ghost, disabled, loading, and icon states.',
     tokens: ['Pressable', 'Accessible', 'Variants'],
+    routeName: 'ButtonScreen',
   },
   {
     id: 'input',
     name: 'Text Input',
     category: 'Forms',
-    description: 'Labels, helper text, validation states, secure text, and prefixes.',
-    status: 'Draft',
+    description:
+      'Labels, helper text, validation states, secure text, and prefixes.',
     tokens: ['Validation', 'Keyboard', 'Focus'],
   },
   {
@@ -54,23 +51,21 @@ const componentItems: ComponentItem[] = [
     name: 'Toast',
     category: 'Feedback',
     description: 'Temporary success, warning, error, and neutral messages.',
-    status: 'Planned',
     tokens: ['Timed', 'Stacked', 'Dismissible'],
   },
   {
     id: 'tabs',
     name: 'Tabs',
     category: 'Navigation',
-    description: 'Segmented navigation for dense screens and component previews.',
-    status: 'Planned',
+    description:
+      'Segmented navigation for dense screens and component previews.',
     tokens: ['Swipe', 'Badges', 'Adaptive'],
   },
 ];
 
 const MainScreen = () => {
   const isDark = useColorScheme() === 'dark';
-  const [selectedCategory, setSelectedCategory] =
-    useState<ComponentCategory>('All');
+  const navigation = useNavigation<StackNavigationProp<MainStackParamList>>();
   const [query, setQuery] = useState('');
   const theme = isDark ? APP_THEMES.dark : APP_THEMES.light;
 
@@ -78,24 +73,32 @@ const MainScreen = () => {
     const normalizedQuery = query.trim().toLowerCase();
 
     return componentItems.filter(item => {
-      const matchesCategory =
-        selectedCategory === 'All' || item.category === selectedCategory;
-      const matchesQuery =
+      return (
         normalizedQuery.length === 0 ||
         item.name.toLowerCase().includes(normalizedQuery) ||
+        item.category.toLowerCase().includes(normalizedQuery) ||
         item.description.toLowerCase().includes(normalizedQuery) ||
-        item.tokens.some(token => token.toLowerCase().includes(normalizedQuery));
-
-      return matchesCategory && matchesQuery;
+        item.tokens.some(token =>
+          token.toLowerCase().includes(normalizedQuery),
+        )
+      );
     });
-  }, [query, selectedCategory]);
+  }, [query]);
 
   const renderComponent: ListRenderItem<ComponentItem> = ({ item }) => (
-    <ComponentCard item={item} theme={theme} />
+    <ComponentCard
+      item={item}
+      theme={theme}
+      onPress={() => {
+        if (item.routeName) {
+          navigation.navigate(item.routeName);
+        }
+      }}
+    />
   );
 
   return (
-    <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.canvas }]}>
+    <Container>
       <FlatList
         data={filteredComponents}
         keyExtractor={item => item.id}
@@ -104,18 +107,17 @@ const MainScreen = () => {
         ListHeaderComponent={
           <View>
             <View style={styles.hero}>
-              <View style={[styles.logoMark, { backgroundColor: theme.ink }]}>
-                <Text style={[styles.logoText, { color: theme.canvas }]}>RN</Text>
+              <View style={styles.header}>
+                <Image source={images.logo} style={styles.logoImage} />
+                <Text style={[styles.kicker, { color: theme.muted }]}>
+                  React Native Components
+                </Text>
               </View>
-              <Text style={[styles.kicker, { color: theme.muted }]}>
-                React Native Components
-              </Text>
               <Text style={[styles.title, { color: theme.ink }]}>
-                Build your component framework from one clean starter.
+                Component Framework
               </Text>
               <Text style={[styles.subtitle, { color: theme.muted }]}>
-                Catalogue every reusable primitive, preview its states, and keep
-                implementation notes close while the system grows.
+                Search, preview, and ship reusable RN building blocks.
               </Text>
             </View>
 
@@ -123,8 +125,9 @@ const MainScreen = () => {
               style={[
                 styles.searchBox,
                 { backgroundColor: theme.surface, borderColor: theme.border },
-              ]}>
-              <Text style={[styles.searchIcon, { color: theme.subtle }]}>/</Text>
+              ]}
+            >
+              <SearchIcon color={theme.subtle} />
               <TextInput
                 value={query}
                 onChangeText={setQuery}
@@ -135,39 +138,6 @@ const MainScreen = () => {
               />
             </View>
 
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={styles.categoryList}>
-              {categories.map(category => {
-                const isSelected = category === selectedCategory;
-                const categoryTextColor = isSelected ? '#ffffff' : theme.ink;
-
-                return (
-                  <Pressable
-                    key={category}
-                    onPress={() => setSelectedCategory(category)}
-                    style={[
-                      styles.categoryChip,
-                      {
-                        backgroundColor: isSelected
-                          ? theme.accent
-                          : theme.surface,
-                        borderColor: isSelected ? theme.accent : theme.border,
-                      },
-                    ]}>
-                    <Text
-                      style={[
-                        styles.categoryText,
-                        { color: categoryTextColor },
-                      ]}>
-                      {category}
-                    </Text>
-                  </Pressable>
-                );
-              })}
-            </ScrollView>
-
             <View style={styles.sectionHeader}>
               <View>
                 <Text style={[styles.sectionTitle, { color: theme.ink }]}>
@@ -175,15 +145,6 @@ const MainScreen = () => {
                 </Text>
                 <Text style={[styles.sectionMeta, { color: theme.muted }]}>
                   {filteredComponents.length} of {componentItems.length} items
-                </Text>
-              </View>
-              <View
-                style={[
-                  styles.statusPill,
-                  { backgroundColor: theme.readySoft },
-                ]}>
-                <Text style={[styles.statusPillText, { color: theme.ready }]}>
-                  Starter
                 </Text>
               </View>
             </View>
@@ -194,47 +155,41 @@ const MainScreen = () => {
             style={[
               styles.emptyState,
               { backgroundColor: theme.surface, borderColor: theme.border },
-            ]}>
+            ]}
+          >
             <Text style={[styles.emptyTitle, { color: theme.ink }]}>
               No components found
             </Text>
             <Text style={[styles.emptyText, { color: theme.muted }]}>
-              Try another search or category, then add your next component to the
-              catalogue data.
-            </Text>
-          </View>
-        }
-        ListFooterComponent={
-          <View
-            style={[
-              styles.nextPanel,
-              { backgroundColor: theme.ink, borderColor: theme.ink },
-            ]}>
-            <Text style={[styles.nextTitle, { color: theme.canvas }]}>
-              Next useful files
-            </Text>
-            <Text style={[styles.nextText, { color: theme.nextMuted }]}>
-              Create folders like src/components, src/tokens, and src/screens as
-              this starter graduates into a reusable framework.
+              Try another search or category, then add your next component to
+              the catalogue data.
             </Text>
           </View>
         }
       />
-    </SafeAreaView>
+    </Container>
   );
 };
+
+const SearchIcon = ({ color }: { color: string }) => (
+  <View style={styles.searchIcon}>
+    <View style={[styles.searchIconCircle, { borderColor: color }]} />
+    <View style={[styles.searchIconHandle, { backgroundColor: color }]} />
+  </View>
+);
 
 const ComponentCard = ({
   item,
   theme,
+  onPress,
 }: {
   item: ComponentItem;
   theme: AppTheme;
+  onPress: () => void;
 }) => {
-  const statusColor = getStatusColor(item.status, theme);
-
   return (
     <Pressable
+      onPress={onPress}
       style={({ pressed }) => [
         styles.card,
         {
@@ -242,7 +197,8 @@ const ComponentCard = ({
           borderColor: theme.border,
           opacity: pressed ? 0.82 : 1,
         },
-      ]}>
+      ]}
+    >
       <View style={styles.cardTopRow}>
         <View>
           <Text style={[styles.cardCategory, { color: theme.accent }]}>
@@ -250,11 +206,6 @@ const ComponentCard = ({
           </Text>
           <Text style={[styles.cardTitle, { color: theme.ink }]}>
             {item.name}
-          </Text>
-        </View>
-        <View style={[styles.itemStatus, { backgroundColor: statusColor.soft }]}>
-          <Text style={[styles.itemStatusText, { color: statusColor.strong }]}>
-            {item.status}
           </Text>
         </View>
       </View>
@@ -268,7 +219,8 @@ const ComponentCard = ({
             style={[
               styles.token,
               { backgroundColor: theme.token, borderColor: theme.border },
-            ]}>
+            ]}
+          >
             <Text style={[styles.tokenText, { color: theme.muted }]}>
               {token}
             </Text>
@@ -277,18 +229,6 @@ const ComponentCard = ({
       </View>
     </Pressable>
   );
-};
-
-const getStatusColor = (status: ComponentItem['status'], theme: AppTheme) => {
-  if (status === 'Ready') {
-    return { strong: theme.ready, soft: theme.readySoft };
-  }
-
-  if (status === 'Draft') {
-    return { strong: theme.warning, soft: theme.warningSoft };
-  }
-
-  return { strong: theme.planned, soft: theme.plannedSoft };
 };
 
 export default MainScreen;
