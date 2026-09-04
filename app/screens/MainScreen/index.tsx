@@ -18,10 +18,12 @@ import { APP_THEMES, AppTheme } from '../../constants';
 import { MainStackParamList } from '../../navigation/types';
 import { styles } from './styles';
 
+type ComponentCategory = 'Feedback' | 'Navigation';
+
 type ComponentItem = {
   id: string;
   name: string;
-  category: 'Navigation';
+  category: ComponentCategory;
   description: string;
   tokens: string[];
   routeName?: keyof MainStackParamList;
@@ -36,6 +38,14 @@ const componentItems: ComponentItem[] = [
       'Snap-up surface with backdrop dismissal, drag handling, and actions.',
     tokens: ['Gesture', 'Modal', 'Safe Area'],
     routeName: 'BottomSheetScreen',
+  },
+  {
+    id: 'toast',
+    name: 'Toast',
+    category: 'Feedback',
+    description: 'Animated feedback message with status icons and action.',
+    tokens: ['Status', 'Action', 'Timed'],
+    routeName: 'ToastScreen',
   },
 ];
 
