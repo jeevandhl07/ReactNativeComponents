@@ -1,7 +1,12 @@
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { BottomSheetScreen, MainScreen, ToastScreen } from '../../screens';
-import { MainStackParamList } from '../types';
+
+export type MainStackParamList = {
+  MainScreen: undefined;
+  BottomSheetScreen: undefined;
+  ToastScreen: undefined;
+};
 
 const Stack = createStackNavigator<MainStackParamList>();
 

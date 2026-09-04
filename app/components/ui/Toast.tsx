@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import {
   Animated,
+  Platform,
   StyleProp,
   StyleSheet,
   Text,
@@ -78,6 +79,10 @@ const Toast = ({
   const opacity = useRef(new Animated.Value(0)).current;
   const hideTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const tone = variantStyles[variant];
+  const topInset = Math.max(
+    insets.top,
+    Platform.OS === 'ios' ? verticalScale(44) : 0,
+  );
 
   const dismiss = useCallback(
     (direction = 1) => {
@@ -185,7 +190,7 @@ const Toast = ({
         style={[
           styles.portal,
           position === 'top'
-            ? [styles.portalTop, { paddingTop: insets.top + SPACING.md }]
+            ? [styles.portalTop, { paddingTop: topInset + SPACING.md }]
             : {
                 paddingBottom: insets.bottom + SPACING.md,
               },
