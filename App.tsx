@@ -4,6 +4,7 @@ import { Platform, StyleSheet, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
+import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import RootNavigator from './app/navigation/RootNavigator';
@@ -20,19 +21,21 @@ function App() {
 
   return (
     <SafeAreaProvider>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <GestureHandlerRootView style={styles.safeArea}>
-            <PortalProvider>
-              <NavigationContainer ref={navigationRef}>
-                <Wrapper style={styles.safeArea}>
-                  <RootNavigator />
-                </Wrapper>
-              </NavigationContainer>
-            </PortalProvider>
-          </GestureHandlerRootView>
-        </PersistGate>
-      </Provider>
+      <KeyboardProvider>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <GestureHandlerRootView style={styles.safeArea}>
+              <PortalProvider>
+                <NavigationContainer ref={navigationRef}>
+                  <Wrapper style={styles.safeArea}>
+                    <RootNavigator />
+                  </Wrapper>
+                </NavigationContainer>
+              </PortalProvider>
+            </GestureHandlerRootView>
+          </PersistGate>
+        </Provider>
+      </KeyboardProvider>
     </SafeAreaProvider>
   );
 }

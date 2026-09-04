@@ -63,6 +63,10 @@ jest.mock('redux-persist/integration/react', () => ({
   PersistGate: ({ children }: { children: React.ReactNode }) => children,
 }));
 
+jest.mock('react-native-keyboard-controller', () => ({
+  KeyboardProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
+
 jest.mock('@react-navigation/native', () => ({
   NavigationContainer: ({ children }: { children: React.ReactNode }) =>
     children,

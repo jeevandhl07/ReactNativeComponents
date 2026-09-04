@@ -15,10 +15,10 @@ import Icon from '../../assets/icon';
 import images from '../../assets/images';
 import { Container } from '../../components';
 import { APP_THEMES, AppTheme } from '../../constants';
-import { MainStackParamList } from '../../navigation/types';
+import type { MainStackParamList } from '../../navigation/MainStack';
 import { styles } from './styles';
 
-type ComponentCategory = 'Feedback' | 'Navigation';
+type ComponentCategory = 'Feedback' | 'Form' | 'Navigation';
 
 type ComponentItem = {
   id: string;
@@ -46,6 +46,15 @@ const componentItems: ComponentItem[] = [
     description: 'Animated feedback message with status icons and action.',
     tokens: ['Status', 'Action', 'Timed'],
     routeName: 'ToastScreen',
+  },
+  {
+    id: 'keyboard-avoid-form',
+    name: 'Keyboard Avoid Form',
+    category: 'Form',
+    description:
+      'Scrollable form that keeps focused inputs visible above the keyboard.',
+    tokens: ['Keyboard', 'Inputs', 'Form'],
+    routeName: 'KeyboardAvoidFormScreen',
   },
 ];
 

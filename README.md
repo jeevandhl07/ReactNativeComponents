@@ -11,6 +11,7 @@ A React Native component foundation with reusable UI, navigation previews, Redux
 - Redux Toolkit + RTK Query
 - Redux Persist + AsyncStorage
 - React Native Gesture Handler
+- React Native Keyboard Controller
 - React Native Safe Area Context
 - React Native Vector Icons
 - React Native Firebase
@@ -44,21 +45,6 @@ npm run lint
 npm test -- --runInBand --watchman=false
 ```
 
-## Folder Structure
-
-```text
-app/
-  assets/        Fonts, icons, images
-  components/    Reusable UI components
-  constants/     Colors, spacing, dimensions, config
-  navigation/    Root and main stack navigation
-  redux/         Store, slices, RTK Query APIs
-  screens/       Component preview screens
-  services/      Push notification helpers
-  types/         Shared TypeScript types
-  utils/         API/auth helpers
-```
-
 ## Components
 
 Reusable components are inside `app/components/ui`.
@@ -69,6 +55,7 @@ Current components:
 - `BottomSheet`
 - `Container`
 - `Dropdown`
+- `KeyboardAvoidForm`
 - `MultiSelectDropdown`
 - `Portal`
 - `Toast`
@@ -76,7 +63,13 @@ Current components:
 Import from:
 
 ```tsx
-import { BottomSheet, Dropdown, MultiSelectDropdown, Toast } from './app/components';
+import {
+  BottomSheet,
+  Dropdown,
+  KeyboardAvoidForm,
+  MultiSelectDropdown,
+  Toast,
+} from './app/components';
 ```
 
 ## BottomSheet
@@ -128,6 +121,19 @@ Multi-select searchable dropdown using the same bottom sheet design.
 ```
 
 Items are staged inside the sheet and saved only after pressing `Done`. `Clear` removes all selected values and closes the sheet.
+
+## KeyboardAvoidForm
+
+Scrollable form wrapper using `react-native-keyboard-controller`.
+
+```tsx
+<KeyboardAvoidForm>
+  <TextInput placeholder="Full name" />
+  <TextInput placeholder="Email" />
+</KeyboardAvoidForm>
+```
+
+Use it for long forms where focused inputs must stay visible above the keyboard on iOS and Android.
 
 ## Toast
 
