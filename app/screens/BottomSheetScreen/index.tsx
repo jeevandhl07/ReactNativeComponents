@@ -9,20 +9,27 @@ import {
   View,
 } from 'react-native';
 import Icon from '../../assets/icon';
-import { AppHeader, BottomSheet, Container, Dropdown } from '../../components';
+import {
+  AppHeader,
+  BottomSheet,
+  Container,
+  Dropdown,
+  MultiSelectDropdown,
+} from '../../components';
 import { APP_THEMES, COLORS, moderateScale } from '../../constants';
 import { styles } from './styles';
 
 type DropdownKey = 'smallData' | 'largeData';
+type MultiSelectKey = 'smallMultiData' | 'largeMultiData';
 
-type DropdownConfig = {
-  key: DropdownKey;
+type DropdownConfig<TKey extends string> = {
+  key: TKey;
   label: string;
   placeholder: string;
   options: string[];
 };
 
-const dropdowns: DropdownConfig[] = [
+const dropdowns: DropdownConfig<DropdownKey>[] = [
   {
     key: 'smallData',
     label: 'Dropdown With 10 Data',
@@ -42,8 +49,30 @@ const initialValues = dropdowns.reduce(
   {} as Record<DropdownKey, string>,
 );
 
+const multiSelectDropdowns: DropdownConfig<MultiSelectKey>[] = [
+  {
+    key: 'smallMultiData',
+    label: 'Multi Select With 10 Data',
+    placeholder: 'Select multiple from 10 items',
+    options: Array.from({ length: 10 }, (_, index) => `Option ${index + 1}`),
+  },
+  {
+    key: 'largeMultiData',
+    label: 'Multi Select With 30 Data',
+    placeholder: 'Select multiple from 30 items',
+    options: Array.from({ length: 30 }, (_, index) => `Data Item ${index + 1}`),
+  },
+];
+
+const initialMultiValues = multiSelectDropdowns.reduce(
+  (values, dropdown) => ({ ...values, [dropdown.key]: [] }),
+  {} as Record<MultiSelectKey, string[]>,
+);
+
 const BottomSheetScreen = () => {
   const [selectedValues, setSelectedValues] = useState(initialValues);
+  const [multiSelectedValues, setMultiSelectedValues] =
+    useState(initialMultiValues);
   const [isInfoSheetVisible, setIsInfoSheetVisible] = useState(false);
   const [isFormSheetVisible, setIsFormSheetVisible] = useState(false);
   const [isFormAtTop, setIsFormAtTop] = useState(true);
@@ -53,6 +82,13 @@ const BottomSheetScreen = () => {
     setSelectedValues(currentValues => ({
       ...currentValues,
       [key]: value,
+    }));
+  };
+
+  const handleMultiSelect = (key: MultiSelectKey, values: string[]) => {
+    setMultiSelectedValues(currentValues => ({
+      ...currentValues,
+      [key]: values,
     }));
   };
 
@@ -106,6 +142,18 @@ const BottomSheetScreen = () => {
             value={selectedValues[dropdown.key]}
             placeholder={dropdown.placeholder}
             onChange={value => handleSelect(dropdown.key, value)}
+            style={styles.dropdownSpacing}
+          />
+        ))}
+
+        {multiSelectDropdowns.map(dropdown => (
+          <MultiSelectDropdown
+            key={dropdown.key}
+            label={dropdown.label}
+            options={dropdown.options}
+            values={multiSelectedValues[dropdown.key]}
+            placeholder={dropdown.placeholder}
+            onChange={values => handleMultiSelect(dropdown.key, values)}
             style={styles.dropdownSpacing}
           />
         ))}
