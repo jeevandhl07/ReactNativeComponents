@@ -40,10 +40,7 @@ type ToastProps = {
   style?: StyleProp<ViewStyle>;
 };
 
-const variantStyles: Record<
-  ToastVariant,
-  { color: string; icon: string }
-> = {
+const variantStyles: Record<ToastVariant, { color: string; icon: string }> = {
   success: {
     color: COLORS.success,
     icon: 'checkmark-circle',
@@ -73,8 +70,9 @@ const Toast = ({
   style,
 }: ToastProps) => {
   const insets = useSafeAreaInsets();
-  const translateY = useRef(new Animated.Value(position === 'top' ? -40 : 40))
-    .current;
+  const translateY = useRef(
+    new Animated.Value(position === 'top' ? -40 : 40),
+  ).current;
   const translateX = useRef(new Animated.Value(0)).current;
   const opacity = useRef(new Animated.Value(0)).current;
   const hideTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -242,7 +240,7 @@ const Toast = ({
 
 const styles = StyleSheet.create({
   portal: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     justifyContent: 'flex-end',
     paddingHorizontal: SPACING.md + moderateScale(2),
   },

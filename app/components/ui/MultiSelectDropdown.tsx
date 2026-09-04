@@ -229,7 +229,9 @@ const MultiSelectDropdown = ({
                   style={[
                     styles.checkCircle,
                     {
-                      borderColor: isSelected ? COLORS.success : COLORS.inputStroke,
+                      borderColor: isSelected
+                        ? COLORS.success
+                        : COLORS.inputStroke,
                       backgroundColor: isSelected
                         ? COLORS.success
                         : theme.surface,
@@ -269,7 +271,9 @@ const MultiSelectDropdown = ({
               },
             ]}
           >
-            <Text style={[styles.clearText, { color: theme.muted }]}>Clear</Text>
+            <Text style={[styles.clearText, { color: theme.muted }]}>
+              Clear
+            </Text>
           </Pressable>
           <Pressable
             onPress={handleDone}
