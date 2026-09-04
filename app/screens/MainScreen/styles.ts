@@ -138,20 +138,4 @@ export const styles = StyleSheet.create({
     fontSize: moderateScale(15),
     lineHeight: moderateScale(22),
   },
-  nextPanel: {
-    borderRadius: BORDER_RADIUS.md,
-    borderWidth: 1,
-    marginTop: SPACING.sm + verticalScale(2),
-    padding: SPACING.md + moderateScale(2),
-  },
-  nextTitle: {
-    fontFamily: FONT_FAMILY.extraBold,
-    fontSize: moderateScale(18),
-    marginBottom: SPACING.sm,
-  },
-  nextText: {
-    fontFamily: FONT_FAMILY.regular,
-    fontSize: moderateScale(15),
-    lineHeight: moderateScale(22),
-  },
 });

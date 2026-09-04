@@ -18,12 +18,10 @@ import { APP_THEMES, AppTheme } from '../../constants';
 import { MainStackParamList } from '../../navigation/types';
 import { styles } from './styles';
 
-type ComponentCategory = 'Basics' | 'Forms' | 'Feedback' | 'Navigation';
-
 type ComponentItem = {
   id: string;
   name: string;
-  category: ComponentCategory;
+  category: 'Navigation';
   description: string;
   tokens: string[];
   routeName?: keyof MainStackParamList;
@@ -38,29 +36,6 @@ const componentItems: ComponentItem[] = [
       'Snap-up surface with backdrop dismissal, drag handling, and actions.',
     tokens: ['Gesture', 'Modal', 'Safe Area'],
     routeName: 'BottomSheetScreen',
-  },
-  {
-    id: 'input',
-    name: 'Text Input',
-    category: 'Forms',
-    description:
-      'Labels, helper text, validation states, secure text, and prefixes.',
-    tokens: ['Validation', 'Keyboard', 'Focus'],
-  },
-  {
-    id: 'toast',
-    name: 'Toast',
-    category: 'Feedback',
-    description: 'Temporary success, warning, error, and neutral messages.',
-    tokens: ['Timed', 'Stacked', 'Dismissible'],
-  },
-  {
-    id: 'tabs',
-    name: 'Tabs',
-    category: 'Navigation',
-    description:
-      'Segmented navigation for dense screens and component previews.',
-    tokens: ['Swipe', 'Badges', 'Adaptive'],
   },
 ];
 
