@@ -55,28 +55,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: SPACING.md - moderateScale(2),
   },
   searchIcon: {
-    height: moderateScale(20),
     marginRight: SPACING.sm + moderateScale(2),
-    position: 'relative',
-    width: moderateScale(20),
-  },
-  searchIconCircle: {
-    borderRadius: moderateScale(6),
-    borderWidth: moderateScale(2),
-    height: moderateScale(12),
-    left: moderateScale(2),
-    position: 'absolute',
-    top: moderateScale(2),
-    width: moderateScale(12),
-  },
-  searchIconHandle: {
-    borderRadius: moderateScale(1),
-    height: moderateScale(8),
-    position: 'absolute',
-    right: moderateScale(3),
-    top: moderateScale(12),
-    transform: [{ rotate: '-45deg' }],
-    width: moderateScale(2),
   },
   searchInput: {
     flex: 1,

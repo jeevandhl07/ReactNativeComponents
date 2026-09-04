@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Icon from '../../assets/icon';
 import {
   COLORS,
   Fonts,
@@ -46,7 +47,12 @@ const AppHeader = ({
           onPress={handleBackPress}
           style={styles.backButton}
         >
-          <Text style={styles.iconText}>{'<'}</Text>
+          <Icon
+            type="ion"
+            name="chevron-back"
+            size={moderateScale(22)}
+            color={COLORS.dark}
+          />
         </TouchableOpacity>
       ) : null}
 
@@ -62,7 +68,12 @@ const AppHeader = ({
           onPress={onRightPress}
           style={styles.actionButton}
         >
-          <Text style={styles.iconText}>{getIconLabel(rightIcon)}</Text>
+          <Icon
+            type="ion"
+            name={rightIcon}
+            size={moderateScale(21)}
+            color={COLORS.dark}
+          />
         </TouchableOpacity>
       ) : null}
 
@@ -72,23 +83,16 @@ const AppHeader = ({
           onPress={onFilterPress}
           style={[styles.actionButton, showRightButton && styles.filterButton]}
         >
-          <Text style={styles.iconText}>{getIconLabel(filterIcon)}</Text>
+          <Icon
+            type="ion"
+            name={filterIcon}
+            size={moderateScale(21)}
+            color={COLORS.dark}
+          />
         </TouchableOpacity>
       ) : null}
     </View>
   );
-};
-
-const getIconLabel = (iconName?: string) => {
-  if (iconName === 'add') {
-    return '+';
-  }
-
-  if (iconName?.includes('filter')) {
-    return 'F';
-  }
-
-  return '+';
 };
 
 const styles = StyleSheet.create({
@@ -122,12 +126,6 @@ const styles = StyleSheet.create({
     color: COLORS.dark,
     fontSize: moderateScale(20),
     fontFamily: Fonts.bold,
-  },
-  iconText: {
-    color: COLORS.dark,
-    fontFamily: Fonts.extraBold,
-    fontSize: moderateScale(20),
-    lineHeight: moderateScale(22),
   },
   actionButton: {
     width: moderateScale(38),

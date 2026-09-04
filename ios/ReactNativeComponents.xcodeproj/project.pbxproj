@@ -13,6 +13,7 @@
 		0F11A0032C5B600100A91F01 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F11A0082C5B600100A91F01 /* Inter-SemiBold.ttf */; };
 		0F11A0042C5B600100A91F01 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F11A0092C5B600100A91F01 /* Inter-Bold.ttf */; };
 		0F11A0052C5B600100A91F01 /* Inter-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F11A00A2C5B600100A91F01 /* Inter-ExtraBold.ttf */; };
+		0F11A00C2C5B600100A91F01 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F11A00D2C5B600100A91F01 /* Ionicons.ttf */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -25,6 +26,7 @@
 		0F11A0082C5B600100A91F01 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Inter-SemiBold.ttf"; path = "ReactNativeComponents/Fonts/Inter-SemiBold.ttf"; sourceTree = "<group>"; };
 		0F11A0092C5B600100A91F01 /* Inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Inter-Bold.ttf"; path = "ReactNativeComponents/Fonts/Inter-Bold.ttf"; sourceTree = "<group>"; };
 		0F11A00A2C5B600100A91F01 /* Inter-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Inter-ExtraBold.ttf"; path = "ReactNativeComponents/Fonts/Inter-ExtraBold.ttf"; sourceTree = "<group>"; };
+		0F11A00D2C5B600100A91F01 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Ionicons.ttf"; path = "ReactNativeComponents/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* ReactNativeComponents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactNativeComponents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ReactNativeComponents/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ReactNativeComponents/Info.plist; sourceTree = "<group>"; };
@@ -54,10 +56,11 @@
 			children = (
 				0F11A0062C5B600100A91F01 /* Inter-Regular.ttf */,
 				0F11A0072C5B600100A91F01 /* Inter-Medium.ttf */,
-				0F11A0082C5B600100A91F01 /* Inter-SemiBold.ttf */,
-				0F11A0092C5B600100A91F01 /* Inter-Bold.ttf */,
-				0F11A00A2C5B600100A91F01 /* Inter-ExtraBold.ttf */,
-			);
+					0F11A0082C5B600100A91F01 /* Inter-SemiBold.ttf */,
+					0F11A0092C5B600100A91F01 /* Inter-Bold.ttf */,
+					0F11A00A2C5B600100A91F01 /* Inter-ExtraBold.ttf */,
+					0F11A00D2C5B600100A91F01 /* Ionicons.ttf */,
+				);
 			name = Fonts;
 			sourceTree = "<group>";
 		};
@@ -183,10 +186,11 @@
 			files = (
 				0F11A0012C5B600100A91F01 /* Inter-Regular.ttf in Resources */,
 				0F11A0022C5B600100A91F01 /* Inter-Medium.ttf in Resources */,
-				0F11A0032C5B600100A91F01 /* Inter-SemiBold.ttf in Resources */,
-				0F11A0042C5B600100A91F01 /* Inter-Bold.ttf in Resources */,
-				0F11A0052C5B600100A91F01 /* Inter-ExtraBold.ttf in Resources */,
-				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+					0F11A0032C5B600100A91F01 /* Inter-SemiBold.ttf in Resources */,
+					0F11A0042C5B600100A91F01 /* Inter-Bold.ttf in Resources */,
+					0F11A0052C5B600100A91F01 /* Inter-ExtraBold.ttf in Resources */,
+					0F11A00C2C5B600100A91F01 /* Ionicons.ttf in Resources */,
+					81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				FC008D445C13B4EBFDD0A220 /* PrivacyInfo.xcprivacy in Resources */,
 			);

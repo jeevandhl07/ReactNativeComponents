@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import Icon from '../../assets/icon';
 import images from '../../assets/images';
 import { Container } from '../../components';
 import { APP_THEMES, AppTheme } from '../../constants';
@@ -30,13 +31,13 @@ type ComponentItem = {
 
 const componentItems: ComponentItem[] = [
   {
-    id: 'button',
-    name: 'Button',
-    category: 'Basics',
+    id: 'bottom-sheet',
+    name: 'Bottom Sheet',
+    category: 'Navigation',
     description:
-      'Primary, secondary, ghost, disabled, loading, and icon states.',
-    tokens: ['Pressable', 'Accessible', 'Variants'],
-    routeName: 'ButtonScreen',
+      'Snap-up surface with backdrop dismissal, drag handling, and actions.',
+    tokens: ['Gesture', 'Modal', 'Safe Area'],
+    routeName: 'BottomSheetScreen',
   },
   {
     id: 'input',
@@ -78,9 +79,7 @@ const MainScreen = () => {
         item.name.toLowerCase().includes(normalizedQuery) ||
         item.category.toLowerCase().includes(normalizedQuery) ||
         item.description.toLowerCase().includes(normalizedQuery) ||
-        item.tokens.some(token =>
-          token.toLowerCase().includes(normalizedQuery),
-        )
+        item.tokens.some(token => token.toLowerCase().includes(normalizedQuery))
       );
     });
   }, [query]);
@@ -127,7 +126,13 @@ const MainScreen = () => {
                 { backgroundColor: theme.surface, borderColor: theme.border },
               ]}
             >
-              <SearchIcon color={theme.subtle} />
+              <Icon
+                type="ion"
+                name="search"
+                color={theme.subtle}
+                size={22}
+                style={styles.searchIcon}
+              />
               <TextInput
                 value={query}
                 onChangeText={setQuery}
@@ -170,13 +175,6 @@ const MainScreen = () => {
     </Container>
   );
 };
-
-const SearchIcon = ({ color }: { color: string }) => (
-  <View style={styles.searchIcon}>
-    <View style={[styles.searchIconCircle, { borderColor: color }]} />
-    <View style={[styles.searchIconHandle, { backgroundColor: color }]} />
-  </View>
-);
 
 const ComponentCard = ({
   item,
